@@ -1,0 +1,3 @@
+[submodule "ACSAgentHub"]
+	path = ACSAgentHub
+	url = https://github.com/managedcoder/ACSAgentHub
