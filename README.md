@@ -63,6 +63,22 @@ To install the Web PubSub extension, type the ```az webpubsub``` command in a Po
 and the extension will prompt you to automatically install itself if its not currently installed. The output
 of this command may be messy with a lot of diagnostics before it prompts to install the extension so be aware of that.
 
+#### Azure Functions Core Tools
+The core agent hub logic lives in a set APIs in the ACSAgentHub Azure Function project and to quickly
+test things out you can run it locally from the command line but you'll need to have the Azure 
+Functions Core Tools v3.X installed.  Alternatively, you can avoid installing the Azure Functions Core
+Tools if you use Visual Studio to run the ACSAgentHub Azure Function project.
+
+To install Azure Function Core Tools v3.X you'll need to download and run the Core Tools installer, based on your version of Windows:
+
+* [v3.x - Windows 64-bit](https://go.microsoft.com/fwlink/?linkid=2135274)
+* [v3.x - Windows 32-bit](https://go.microsoft.com/fwlink/?linkid=2135275)
+
+#### Install Bot Framework Composer
+The ACS Agent Hub works with any kind of bot built on the Microsoft Conversational AI platform (PVA, Composer, 
+Virtual Assistant Template, or SDK bot) but the quickest and easyiest way to get up and running is to use the
+Composer sample included in this solution and to do that you'll need to install the Bot Framework Composer
+[here](https://docs.microsoft.com/en-us/composer/install-composer?tabs=windows)
 
 ## <a name="GettingStarted"></a>Getting Started
 
