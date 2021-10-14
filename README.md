@@ -92,7 +92,7 @@ Open PowerShell and run the following command:
 git clone https://github.com/managedcoder/ContactCenter
 ```
 The ContactCenter solution includes git submodules so you'll need to also run the following commands.  The **--init**
-command only needs to be run once after you clone the repo.  You'll need to run the **--update** every time you
+command only needs to be run once after you clone the repo.  You'll need to run the **--remote** command every time you
 want to pull the latest from the submodules.  If you don't run these commands you'll notice that the submodule won't
 have any source code. 
 ```
