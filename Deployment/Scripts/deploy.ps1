@@ -59,7 +59,11 @@ $agentPortalPath = ".\agent-portal"
 $ACSAgentHubPath = ".\ACSAgentHub"
 $errCnt = 0
 
+Set-Location $ACSAgentHubPath
 
+.\Deployment\Scripts\deploy_acs_agent_hub.ps1 -hubName $NameHub -resourceGroup $resourceGroup -configurationOnly $configurationOnly -location $location -NuGetFullPAth $NuGetFullPath -connectorPackageVersion $connectorPackageVersion -showCommands $showCommands
+
+Set-Location $solutionRoot
 
 $endTime = Get-Date
 $duration = New-TimeSpan $startTime $endTime

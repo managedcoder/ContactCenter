@@ -1,0 +1,47 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "xyjdJi",
+    "name": "BotTourDialog",
+    "description": ""
+  },
+  "autoEndDialog": false,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "1sVGwc"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "YRvoei"
+          },
+          "activity": "${SendActivity_BotTourOverview()}"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnUnknownIntent",
+      "$designer": {
+        "id": "77kmIw"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "dAfOtV"
+          },
+          "value": false
+        }
+      ]
+    }
+  ],
+  "generator": "BotTourDialog.lg",
+  "recognizer": "BotTourDialog.lu.qna",
+  "id": "BotTourDialog"
+}
