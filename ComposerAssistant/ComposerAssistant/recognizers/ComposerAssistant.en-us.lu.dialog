@@ -1,5 +1,8 @@
 {
-  "$kind": "Microsoft.OrchestratorRecognizer",
-  "modelFolder": "=settings.orchestrator.models.en",
-  "snapshotFile": "=settings.orchestrator.snapshots.ComposerAssistant_en_us"
+  "$kind": "Microsoft.LuisRecognizer",
+  "id": "LUIS_ComposerAssistant",
+  "applicationId": "=settings.luis.ComposerAssistant_en_us_lu.appId",
+  "version": "=settings.luis.ComposerAssistant_en_us_lu.version",
+  "endpoint": "=settings.luis.endpoint",
+  "endpointKey": "=settings.luis.endpointKey"
 }

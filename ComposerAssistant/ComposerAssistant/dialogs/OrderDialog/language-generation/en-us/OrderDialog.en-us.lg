@@ -1,0 +1,37 @@
+[import](common.lg)
+
+# SendActivity_tlIeq5()
+[Activity
+    Text = ${SendActivity_tlIeq5_text()}
+]
+
+# SendActivity_tlIeq5_text()
+- You ordered:
+# SendActivity_kSiv5C()
+[Activity
+    Text = ${SendActivity_kSiv5C_text()}
+]
+
+# SendActivity_kSiv5C_text()
+- ${dialog.quantity} ${toLower(dialog.size)} ${toLower(dialog.crust)} ${dialog.pizzaType}${if(greater(int(dialog.quantity), 1), 's','')} ' with ' ${dialog.toppings}
+# SendActivity_5HOlcw()
+[Activity
+    Text = ${SendActivity_5HOlcw_text()}
+]
+
+# SendActivity_5HOlcw_text()
+- and a side order of ${dialog.sideOrder}
+# SendActivity_yqDKxz()
+[Activity
+    Text = ${SendActivity_yqDKxz_text()}
+]
+
+# SendActivity_yqDKxz_text()
+- Here is order with modifiers: ${jsonStringify(@order)}
+# SendActivity_3Uww20()
+[Activity
+    Text = ${SendActivity_3Uww20_text()}
+]
+
+# SendActivity_3Uww20_text()
+- Saw modifiers

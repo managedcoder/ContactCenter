@@ -19,6 +19,9 @@
 **/appsettings.production.json
 *.bot
 
+#ignored Composer files
+/ComposerAssistant/ComposerAssistant/code.zip
+
 # User-specific files
 *.rsuser
 *.suo

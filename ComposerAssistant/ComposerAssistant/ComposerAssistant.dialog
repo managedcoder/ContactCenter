@@ -478,6 +478,24 @@
           ]
         }
       ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "GijipK",
+        "name": "TakeOrder"
+      },
+      "intent": "TakeOrder",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "duOnNU"
+          },
+          "activityProcessed": false,
+          "dialog": "OrderDialog"
+        }
+      ]
     }
   ],
   "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",

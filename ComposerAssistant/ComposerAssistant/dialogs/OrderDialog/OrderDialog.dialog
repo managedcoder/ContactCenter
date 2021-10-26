@@ -1,0 +1,168 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "yk9pCl",
+    "name": "OrderDialog",
+    "comment": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "TGEpPo"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "tlIeq5"
+          },
+          "activity": "${SendActivity_tlIeq5()}"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "yqDKxz"
+          },
+          "activity": "${SendActivity_yqDKxz()}"
+        },
+        {
+          "$kind": "Microsoft.Foreach",
+          "$designer": {
+            "id": "01GsLz"
+          },
+          "index": "dialog.foreach.index",
+          "value": "dialog.foreach.value",
+          "itemsProperty": "@order.FullPizzaWithModifiers",
+          "actions": [
+            {
+              "$kind": "Microsoft.SetProperties",
+              "$designer": {
+                "id": "70MuY6"
+              },
+              "assignments": [
+                {
+                  "value": "${if(contains(dialog.foreach.value, 'PizzaType'), dialog.foreach.value.PizzaType[0], 'pizza')}",
+                  "property": "dialog.pizzaType"
+                },
+                {
+                  "property": "dialog.quantity",
+                  "value": "${if(contains(dialog.foreach.value, 'Quantity'), dialog.foreach.value.Quantity[0], 1)}"
+                },
+                {
+                  "property": "dialog.crust",
+                  "value": "${if(contains(dialog.foreach.value, 'Crust'), concat(dialog.foreach.value.Crust[0][0], ' crust'), '')}"
+                },
+                {
+                  "property": "dialog.size",
+                  "value": "${if(contains(dialog.foreach.value, 'Size'), dialog.foreach.value.Size[0][0], '')}"
+                }
+              ]
+            },
+            {
+              "$kind": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "7ly9GB"
+              },
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "3Uww20"
+                  },
+                  "activity": "${SendActivity_3Uww20()}"
+                },
+                {
+                  "$kind": "Microsoft.Foreach",
+                  "$designer": {
+                    "id": "enTc7E"
+                  },
+                  "index": "dialog.foreach.index",
+                  "value": "dialog.foreach.value",
+                  "itemsProperty": "dialog.foreach.value.ToppingModifiers",
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.SetProperty",
+                      "$designer": {
+                        "id": "aCflYr"
+                      },
+                      "property": "dialog.modifier",
+                      "value": "=${if(and(contains(dialog.foreach.value, 'Modifier'), equals(dialog.foreach.value.Modifier, 'Remove')), 'no ', '')}"
+                    },
+                    {
+                      "$kind": "Microsoft.SetProperty",
+                      "$designer": {
+                        "id": "b2VBcM"
+                      },
+                      "property": "dialog.toppingsModifier",
+                      "value": "=${concat(dialog.modifier, dialog.foreach.value.Topping, ' on ', dialog.foreach.value.Scope)}"
+                    },
+                    {
+                      "$kind": "Microsoft.SetProperty",
+                      "$designer": {
+                        "id": "LrJEIY"
+                      },
+                      "property": "dialog.toppings",
+                      "value": "=concat(dialog.toppings, if(greater(dialog.foreach.index, 0), concat(' and ', dialog.toppingsModifier), dialog.toppingsModifier))"
+                    }
+                  ]
+                }
+              ],
+              "condition": "=contains(dialog.foreach.value, 'ToppingModifiers')"
+            },
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "kSiv5C"
+              },
+              "activity": "${SendActivity_kSiv5C()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "U9hz02"
+          },
+          "condition": "=contains(@order, 'SideOrder')",
+          "actions": [
+            {
+              "$kind": "Microsoft.Foreach",
+              "$designer": {
+                "id": "Am8XuZ"
+              },
+              "index": "dialog.foreach.index",
+              "value": "dialog.foreach.value",
+              "itemsProperty": "@order.SideOrder[0].SideProduct",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SetProperty",
+                  "$designer": {
+                    "id": "iz2oXt"
+                  },
+                  "property": "dialog.sideOrder",
+                  "value": "=concat(dialog.sideOrder, if(greater(dialog.foreach.index, 0), concat(' and ', dialog.foreach.value), dialog.foreach.value))"
+                }
+              ]
+            },
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "5HOlcw"
+              },
+              "activity": "${SendActivity_5HOlcw()}"
+            }
+          ],
+          "elseActions": []
+        }
+      ]
+    }
+  ],
+  "generator": "OrderDialog.lg",
+  "recognizer": "OrderDialog.lu.qna",
+  "id": "OrderDialog"
+}

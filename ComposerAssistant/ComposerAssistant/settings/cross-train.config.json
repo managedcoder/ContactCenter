@@ -12,6 +12,9 @@
       "Help": "",
       "": [
         "ChitchatDialog.en-us"
+      ],
+      "TakeOrder": [
+        "OrderDialog.en-us"
       ]
     }
   }

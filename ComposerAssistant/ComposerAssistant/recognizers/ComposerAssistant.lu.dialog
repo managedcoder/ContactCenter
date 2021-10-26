@@ -1,6 +1,6 @@
 {
   "$kind": "Microsoft.MultiLanguageRecognizer",
-  "id": "ORCHESTRATOR_ComposerAssistant",
+  "id": "LUIS_ComposerAssistant",
   "recognizers": {
     "en-us": "ComposerAssistant.en-us.lu",
     "": "ComposerAssistant.en-us.lu"
