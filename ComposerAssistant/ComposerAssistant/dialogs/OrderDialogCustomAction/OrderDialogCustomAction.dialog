@@ -1,0 +1,47 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "sJLNyJ",
+    "name": "OrderDialogCustomAction",
+    "comment": "Shows how custom actions can be used when adaptive expressions get unweildly.  You can use the following pizza order to exercises the full LUIS model and extraction logic: \"can i get a small margarita pizza please with bacon no onions and 2 large thin crust pizzas with half ham and the other half bacon and a coke and onion rings thanks\""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "F1IyJ3"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "MmPAge"
+          },
+          "activity": "${SendActivity_MmPAge()}"
+        },
+        {
+          "$kind": "RestateOrder",
+          "$designer": {
+            "id": "HecRUy"
+          },
+          "Order": "=@order",
+          "resultProperty": "dialog.restateOrder"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "68DVrY"
+          },
+          "activity": "${SendActivity_68DVrY()}"
+        }
+      ]
+    }
+  ],
+  "generator": "OrderDialogCustomAction.lg",
+  "recognizer": "OrderDialogCustomAction.lu.qna",
+  "id": "OrderDialogCustomAction"
+}

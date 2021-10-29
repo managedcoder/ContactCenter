@@ -2,8 +2,8 @@
   "$kind": "Microsoft.AdaptiveDialog",
   "$designer": {
     "id": "yk9pCl",
-    "name": "OrderDialog",
-    "comment": ""
+    "name": "OrderDialogAdaptiveExpression",
+    "comment": "This dialog shows how to use adaptive expressions to access and extract entities.  This is a case where adaptive expressions can get combersome so we've also included a custom action that simplifies things by dropping into C# to extract the entities.  You can use the following pizza order to exercises the full LUIS model and extraction logic: \"can i get a small margarita pizza please with bacon no onions and 2 large thin crust pizzas with half ham and the other half bacon and a coke and onion rings thanks\""
   },
   "autoEndDialog": true,
   "defaultResultProperty": "dialog.result",
@@ -13,7 +13,8 @@
       "$designer": {
         "name": "BeginDialog",
         "description": "",
-        "id": "TGEpPo"
+        "id": "TGEpPo",
+        "comment": "You can use the following pizza order to exercises the full LUIS model and extraction logic: \"can i get a small margarita pizza please with bacon no onions and 2 large thin crust pizzas with half ham and the other half bacon and a coke and onion rings thanks\""
       },
       "actions": [
         {
@@ -24,19 +25,12 @@
           "activity": "${SendActivity_tlIeq5()}"
         },
         {
-          "$kind": "Microsoft.SendActivity",
-          "$designer": {
-            "id": "yqDKxz"
-          },
-          "activity": "${SendActivity_yqDKxz()}"
-        },
-        {
           "$kind": "Microsoft.Foreach",
           "$designer": {
             "id": "01GsLz"
           },
-          "index": "dialog.foreach.index",
-          "value": "dialog.foreach.value",
+          "index": "dialog.foreach.pizzaIndex",
+          "value": "dialog.foreach.pizzaValue",
           "itemsProperty": "@order.FullPizzaWithModifiers",
           "actions": [
             {
@@ -46,20 +40,20 @@
               },
               "assignments": [
                 {
-                  "value": "${if(contains(dialog.foreach.value, 'PizzaType'), dialog.foreach.value.PizzaType[0], 'pizza')}",
+                  "value": "${if(contains(dialog.foreach.pizzaValue, 'PizzaType'), dialog.foreach.pizzaValue.PizzaType[0], 'pizza')}",
                   "property": "dialog.pizzaType"
                 },
                 {
                   "property": "dialog.quantity",
-                  "value": "${if(contains(dialog.foreach.value, 'Quantity'), dialog.foreach.value.Quantity[0], 1)}"
+                  "value": "${if(contains(dialog.foreach.pizzaValue, 'Quantity'), dialog.foreach.pizzaValue.Quantity[0], 1)}"
                 },
                 {
                   "property": "dialog.crust",
-                  "value": "${if(contains(dialog.foreach.value, 'Crust'), concat(dialog.foreach.value.Crust[0][0], ' crust'), '')}"
+                  "value": "${if(contains(dialog.foreach.pizzaValue, 'Crust'), concat(dialog.foreach.pizzaValue.Crust[0][0], ' crust'), '')}"
                 },
                 {
                   "property": "dialog.size",
-                  "value": "${if(contains(dialog.foreach.value, 'Size'), dialog.foreach.value.Size[0][0], '')}"
+                  "value": "${if(contains(dialog.foreach.pizzaValue, 'Size'), dialog.foreach.pizzaValue.Size[0][0], '')}"
                 }
               ]
             },
@@ -70,20 +64,13 @@
               },
               "actions": [
                 {
-                  "$kind": "Microsoft.SendActivity",
-                  "$designer": {
-                    "id": "3Uww20"
-                  },
-                  "activity": "${SendActivity_3Uww20()}"
-                },
-                {
                   "$kind": "Microsoft.Foreach",
                   "$designer": {
                     "id": "enTc7E"
                   },
-                  "index": "dialog.foreach.index",
-                  "value": "dialog.foreach.value",
-                  "itemsProperty": "dialog.foreach.value.ToppingModifiers",
+                  "index": "dialog.foreach.toppingIndex",
+                  "value": "dialog.foreach.toppingValue",
+                  "itemsProperty": "dialog.foreach.pizzaValue.ToppingModifiers",
                   "actions": [
                     {
                       "$kind": "Microsoft.SetProperty",
@@ -91,7 +78,15 @@
                         "id": "aCflYr"
                       },
                       "property": "dialog.modifier",
-                      "value": "=${if(and(contains(dialog.foreach.value, 'Modifier'), equals(dialog.foreach.value.Modifier, 'Remove')), 'no ', '')}"
+                      "value": "${if(and(contains(dialog.foreach.toppingValue, 'Modifier'), equals(dialog.foreach.toppingValue.Modifier[0][0], 'Remove')), ' no ', '')}"
+                    },
+                    {
+                      "$kind": "Microsoft.SetProperty",
+                      "$designer": {
+                        "id": "v6Zj5x"
+                      },
+                      "property": "dialog.scope",
+                      "value": "${if(contains(dialog.foreach.toppingValue, 'Scope'), dialog.foreach.toppingValue.Scope[0][0], '')}"
                     },
                     {
                       "$kind": "Microsoft.SetProperty",
@@ -99,7 +94,7 @@
                         "id": "b2VBcM"
                       },
                       "property": "dialog.toppingsModifier",
-                      "value": "=${concat(dialog.modifier, dialog.foreach.value.Topping, ' on ', dialog.foreach.value.Scope)}"
+                      "value": "${concat(dialog.modifier, dialog.scope, ' ',  dialog.foreach.toppingValue.Topping[0][0])}"
                     },
                     {
                       "$kind": "Microsoft.SetProperty",
@@ -107,12 +102,32 @@
                         "id": "LrJEIY"
                       },
                       "property": "dialog.toppings",
-                      "value": "=concat(dialog.toppings, if(greater(dialog.foreach.index, 0), concat(' and ', dialog.toppingsModifier), dialog.toppingsModifier))"
+                      "value": "=concat(dialog.toppings, if(greater(dialog.foreach.toppingIndex, 0), concat(' and ', dialog.toppingsModifier), dialog.toppingsModifier))"
+                    },
+                    {
+                      "$kind": "Microsoft.SetProperties",
+                      "$designer": {
+                        "id": "cxdQQj"
+                      },
+                      "assignments": [
+                        {
+                          "property": "dialog.modifier",
+                          "value": "=null"
+                        },
+                        {
+                          "property": "dialog.scope",
+                          "value": "=null"
+                        },
+                        {
+                          "property": "dialog.toppingsModifier",
+                          "value": "=null"
+                        }
+                      ]
                     }
                   ]
                 }
               ],
-              "condition": "=contains(dialog.foreach.value, 'ToppingModifiers')"
+              "condition": "=contains(dialog.foreach.pizzaValue, 'ToppingModifiers')"
             },
             {
               "$kind": "Microsoft.SendActivity",
@@ -120,6 +135,14 @@
                 "id": "kSiv5C"
               },
               "activity": "${SendActivity_kSiv5C()}"
+            },
+            {
+              "$kind": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "CAWzSK"
+              },
+              "property": "dialog.toppings",
+              "value": "=null"
             }
           ]
         },

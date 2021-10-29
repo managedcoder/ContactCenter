@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <Description>Extract order to show how to extract entities</Description>
+    <Summary>Extract order to show how to extract entities</Summary>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <PackageTags>msbot-component;msbot-action</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="**/*.schema" />
+    <Content Include="**/*.uischema" />
+    <None Include="exported/**/*.*" Pack="true" PackagePath="exported" />
+    <None Include="README.md" Condition="Exists('README.md')" Pack="true" PackagePath="" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime" Version="4.14.1" />
+  </ItemGroup>
+
+</Project>

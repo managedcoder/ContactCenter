@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# SendActivity_MmPAge()
+[Activity
+    Text = ${SendActivity_MmPAge_text()}
+]
+
+# SendActivity_MmPAge_text()
+- You ordered!:
+# SendActivity_68DVrY()
+[Activity
+    Text = ${SendActivity_68DVrY_text()}
+]
+
+# SendActivity_68DVrY_text()
+- ${dialog.restateOrder}

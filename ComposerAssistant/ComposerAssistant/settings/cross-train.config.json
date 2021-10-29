@@ -14,7 +14,8 @@
         "ChitchatDialog.en-us"
       ],
       "TakeOrder": [
-        "OrderDialog.en-us"
+        "OrderDialog.en-us",
+        "OrderDialogCustomAction.en-us"
       ]
     }
   }

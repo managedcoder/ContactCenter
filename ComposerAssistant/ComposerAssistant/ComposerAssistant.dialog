@@ -494,6 +494,14 @@
           },
           "activityProcessed": false,
           "dialog": "OrderDialog"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "t8UP4O"
+          },
+          "activityProcessed": false,
+          "dialog": "OrderDialogCustomAction"
         }
       ]
     }
