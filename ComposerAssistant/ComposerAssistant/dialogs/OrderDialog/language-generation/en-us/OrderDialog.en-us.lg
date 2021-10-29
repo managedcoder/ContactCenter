@@ -6,7 +6,7 @@
 ]
 
 # SendActivity_tlIeq5_text()
-- You ordered:
+- You adaptive-extracted ordered:
 # SendActivity_5HOlcw()
 [Activity
     Text = ${SendActivity_5HOlcw_text()}

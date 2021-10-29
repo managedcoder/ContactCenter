@@ -6,7 +6,7 @@
 ]
 
 # SendActivity_MmPAge_text()
-- You ordered!:
+- Your custom-action-extracted ordered:
 # SendActivity_68DVrY()
 [Activity
     Text = ${SendActivity_68DVrY_text()}
